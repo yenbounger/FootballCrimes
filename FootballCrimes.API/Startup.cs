@@ -17,6 +17,8 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Postcode.Client;
+using PoliceClient;
 
 namespace FootballCrimes.API
 {
@@ -44,6 +46,8 @@ namespace FootballCrimes.API
             });
             services.AddSingleton<HttpClient>();
             services.AddTransient<FootballDataClient>();
+            services.AddTransient<PostcodeClient>();
+            services.AddTransient<PoliceDataClient>();
             services.Configure<ApiKeys>(Configuration.GetSection("ApiKeys"));
             services.AddSwaggerGen(c =>
             {

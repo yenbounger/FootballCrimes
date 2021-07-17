@@ -11,12 +11,17 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Postcode.Client;
+using PoliceClient;
+using Police.Client.Model;
 
 namespace FootballCrimes.API
 {
     public class DataInitialiser : IHostedService
     {
         private readonly IServiceProvider _serviceProvider;
+        private readonly DateTime _minPoliceDate = new(2018, 06, 01);
+        private readonly DateTime _lastMonth = DateTime.Now.AddMonths(-1);
 
         public DataInitialiser(IServiceProvider serviceProvider)
         {
@@ -25,13 +30,75 @@ namespace FootballCrimes.API
 
         public async Task SeedData()
         {
-            using (var scope = _serviceProvider.CreateScope())
+            using var scope = _serviceProvider.CreateScope();
+            using var context = scope.ServiceProvider.GetRequiredService<FootballCrimesContext>();
+            CreateAndUpdateDatabase(context);
+            await AddSeasons(scope, context);
+            await ValidatePostcodes(scope, context);
+            await AddPositionalData(scope, context);
+            await AddCrimeData(scope, context);
+        }
+
+        private async Task AddCrimeData(IServiceScope scope, FootballCrimesContext context)
+        {
+            var crimelessStadiums = context.Stadiums.Where(x => x.Crimes.Count <= 0).ToList();
+            var policeDates = new List<DateTime>();
+            var startDate = new DateTime(_lastMonth.Year, _lastMonth.Month, 1);
+            while (startDate.Month >= _minPoliceDate.Month || startDate.Year > _minPoliceDate.Year)
             {
-                using (var context = scope.ServiceProvider.GetRequiredService<FootballCrimesContext>())
+                policeDates.Add(startDate);
+                startDate = startDate.AddMonths(-1);
+            }
+            var counter = 0;
+            foreach (var stadium in crimelessStadiums)
+            {
+                var policeClient = scope.ServiceProvider.GetRequiredService<PoliceDataClient>();
+                foreach (var date in policeDates)
                 {
-                    CreateAndUpdateDatabase(context);
-                    await AddSeasons(scope, context);
+                    var result = await policeClient.GetDataForTimeAndPlace(stadium.Longitude, stadium.Latitude, date);
+                    // max 15 requests per 1 second, set max requests to 14 and delay to 1.5 seconds to give some leeway
+                    if (counter % 15 == 0)
+                    {
+                        await Task.Delay(1000);
+                    }
+                    counter++;
+                    if (result.Count > 0)
+                    {
+
+                        stadium.AddCrimes(result);
+                        context.Update(stadium);
+                        context.SaveChanges();
+                    }
                 }
+
+
+            }
+        }
+
+        private static async Task AddPositionalData(IServiceScope scope, FootballCrimesContext context)
+        {
+            var noPositionalData = context.Stadiums.Where(x => x.ValidatedPostcode != default && (x.Longitude == default || x.Latitude == default)).ToList();
+            foreach (var stadium in noPositionalData)
+            {
+                var postcodeClient = scope.ServiceProvider.GetRequiredService<PostcodeClient>();
+                var postcodeData = await postcodeClient.GetPostcodeData(stadium.ValidatedPostcode);
+                stadium.UpdateLongAndLat(postcodeData.Result.Longitude, postcodeData.Result.Latitude);
+                context.SaveChanges();
+            }
+        }
+
+        private static async Task ValidatePostcodes(IServiceScope scope, FootballCrimesContext context)
+        {
+            var invalidPostcodes = context.Stadiums.Where(x => x.ValidatedPostcode == default).ToList();
+            foreach (var stadium in invalidPostcodes)
+            {
+                var postcodeClient = scope.ServiceProvider.GetRequiredService<PostcodeClient>();
+                var isValid = await postcodeClient.IsPostcodeValid(stadium.PostcodeToValidate);
+                if (isValid)
+                {
+                    stadium.AddValidatedPostcode(stadium.PostcodeToValidate);
+                }
+                context.SaveChanges();
             }
         }
 

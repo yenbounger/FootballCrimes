@@ -17,7 +17,7 @@ namespace FootballCrimes.API.Extensions
             return str switch
             {
                 "anti-social-behaviour" => CrimeType.AntiSocialBehaviour,
-                "bicyle-theft" => CrimeType.BicycleTheft,
+                "bicycle-theft" => CrimeType.BicycleTheft,
                 "burglary" => CrimeType.Burglary,
                 "criminal-damage-arson" => CrimeType.CriminalDamageAndArson,
                 "drugs" => CrimeType.Drugs,

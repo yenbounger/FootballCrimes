@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Police.Client.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,22 +24,34 @@ namespace FootballCrimes.API.Models
             {
                 var split = FullAddress.Split(' ');
                 // postcode is the last for address on the api can manipulate the string to get the post code
-                return  $"{split[split.Length - 1]} {split[split.Length - 2]}";
+                return $"{split[^2]} {split[^1]}";
             } }
         public string ValidatedPostcode { get; private set; }
         public double Longitude { get; private set; }
         public double Latitude { get; private set; }
         public List<Crime> Crimes { get; private set; } = new List<Crime>();
 
-        private void AddValidatedPostcode(string postcode)
+
+        public void UpdateLongAndLat(double longitude, double latitude)
         {
-            if (ValidatedPostcode != default)
+            Longitude = longitude;
+            Latitude = latitude;
+        }
+
+        public void AddValidatedPostcode(string postcode)
+        {
+            if (ValidatedPostcode == default)
             {
                 ValidatedPostcode = postcode;
             } else
             {
                 throw new Exception($"Stadium {Name} ({Id}) already has a valid postcode.");
             }
+        }
+
+        public void AddCrimes(List<RawPoliceData> crimes)
+        {
+            Crimes.AddRange(crimes.Select(x => new Crime(x)));
         }
 
     }

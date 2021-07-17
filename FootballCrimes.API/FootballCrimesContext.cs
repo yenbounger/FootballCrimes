@@ -18,5 +18,6 @@ namespace FootballCrimes.API
         public DbSet<Team> Teams { get; set; }
         public DbSet<Stadium> Stadiums { get; set; }
         public DbSet<Crime> Crimes { get; set; }
+
     }
 }

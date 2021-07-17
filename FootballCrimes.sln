@@ -34,6 +34,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballCrimes.Shared", "Fo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballCrimes.API.Tests", "FootballCrimes.API.Tests\FootballCrimes.API.Tests.csproj", "{DD65F67E-7C93-42EF-AC61-F881272CB3DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Postcode.Client", "Postcode.Client\Postcode.Client.csproj", "{1A1759C0-D50A-4E27-8500-564C621F7ECA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Police.Client", "PoliceClient\Police.Client.csproj", "{8FF0C395-7F93-4698-9AA9-547DB7178523}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +68,14 @@ Global
 		{DD65F67E-7C93-42EF-AC61-F881272CB3DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD65F67E-7C93-42EF-AC61-F881272CB3DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD65F67E-7C93-42EF-AC61-F881272CB3DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A1759C0-D50A-4E27-8500-564C621F7ECA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A1759C0-D50A-4E27-8500-564C621F7ECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A1759C0-D50A-4E27-8500-564C621F7ECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A1759C0-D50A-4E27-8500-564C621F7ECA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FF0C395-7F93-4698-9AA9-547DB7178523}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FF0C395-7F93-4698-9AA9-547DB7178523}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FF0C395-7F93-4698-9AA9-547DB7178523}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FF0C395-7F93-4698-9AA9-547DB7178523}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
