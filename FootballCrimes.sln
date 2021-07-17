@@ -3,7 +3,36 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballCrimes.API", "FootballCrimes.API\FootballCrimes.API.csproj", "{FDA38A79-54F7-40A4-AD61-825730BA7A80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballCrimes.API", "FootballCrimes.API\FootballCrimes.API.csproj", "{FDA38A79-54F7-40A4-AD61-825730BA7A80}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "FootballCrimes.Web", "FootballCrimes.Web\", "{6D6B4D32-152A-4C7C-9626-ACA3D6404EF3}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_62872"
+		Debug.AspNetCompiler.PhysicalPath = "FootballCrimes.Web\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62872\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_62872"
+		Release.AspNetCompiler.PhysicalPath = "FootballCrimes.Web\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62872\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "62872"
+		SlnRelativePath = "FootballCrimes.Web\"
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballData.Client", "FootballData.Client\FootballData.Client.csproj", "{908A99C8-5475-4F20-8133-6E45A4DF10CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballData.Client.Tests", "FootballDataClientTests\FootballData.Client.Tests.csproj", "{80A89060-F43B-43B1-9221-4AF79A434470}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballCrimes.Shared", "FootballCrimes.Shared\FootballCrimes.Shared.csproj", "{008117A1-16E4-4E6E-BA54-C4CC68BB2631}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballCrimes.API.Tests", "FootballCrimes.API.Tests\FootballCrimes.API.Tests.csproj", "{DD65F67E-7C93-42EF-AC61-F881272CB3DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +44,26 @@ Global
 		{FDA38A79-54F7-40A4-AD61-825730BA7A80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDA38A79-54F7-40A4-AD61-825730BA7A80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDA38A79-54F7-40A4-AD61-825730BA7A80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D6B4D32-152A-4C7C-9626-ACA3D6404EF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D6B4D32-152A-4C7C-9626-ACA3D6404EF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D6B4D32-152A-4C7C-9626-ACA3D6404EF3}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D6B4D32-152A-4C7C-9626-ACA3D6404EF3}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{908A99C8-5475-4F20-8133-6E45A4DF10CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{908A99C8-5475-4F20-8133-6E45A4DF10CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{908A99C8-5475-4F20-8133-6E45A4DF10CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{908A99C8-5475-4F20-8133-6E45A4DF10CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80A89060-F43B-43B1-9221-4AF79A434470}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80A89060-F43B-43B1-9221-4AF79A434470}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80A89060-F43B-43B1-9221-4AF79A434470}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80A89060-F43B-43B1-9221-4AF79A434470}.Release|Any CPU.Build.0 = Release|Any CPU
+		{008117A1-16E4-4E6E-BA54-C4CC68BB2631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{008117A1-16E4-4E6E-BA54-C4CC68BB2631}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{008117A1-16E4-4E6E-BA54-C4CC68BB2631}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{008117A1-16E4-4E6E-BA54-C4CC68BB2631}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD65F67E-7C93-42EF-AC61-F881272CB3DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD65F67E-7C93-42EF-AC61-F881272CB3DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD65F67E-7C93-42EF-AC61-F881272CB3DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD65F67E-7C93-42EF-AC61-F881272CB3DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
