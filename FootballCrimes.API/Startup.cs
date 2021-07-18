@@ -46,7 +46,12 @@ namespace FootballCrimes.API
             });
             services.AddDbContext<FootballCrimesContext>(config =>
             {
-                config.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                var connstring = Configuration.GetSection("MYSQLCONNSTR_DefaultConnection").Value;
+                if (string.IsNullOrEmpty(connstring))
+                {
+                    connstring = Configuration.GetConnectionString("DefaultConnection");
+                }
+                config.UseSqlServer(connstring);
             });
             services.AddSingleton<HttpClient>();
             services.AddTransient<FootballDataClient>();
