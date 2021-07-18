@@ -46,7 +46,7 @@ namespace FootballCrimes.API
             });
             services.AddDbContext<FootballCrimesContext>(config =>
             {
-                var connstring = Configuration.GetSection("MYSQLCONNSTR_DefaultConnection").Value;
+                var connstring = Configuration.GetConnectionString("LocalSqlSever").Value;
                 if (string.IsNullOrEmpty(connstring))
                 {
                     connstring = Configuration.GetConnectionString("DefaultConnection");

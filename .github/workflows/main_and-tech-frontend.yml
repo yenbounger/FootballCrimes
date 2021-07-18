@@ -37,5 +37,5 @@ jobs:
         app-name: and-tech-frontend
         slot-name: Production
         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_56AA66547113412A9C28A94BA745DC8D }}
-        package: ./dist
+        package: ./dist/football-crimes
 
