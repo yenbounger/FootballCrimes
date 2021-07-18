@@ -20,6 +20,7 @@ using Microsoft.EntityFrameworkCore;
 using Postcode.Client;
 using PoliceClient;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using System.Text.RegularExpressions;
 
 namespace FootballCrimes.API
 {
@@ -46,8 +47,18 @@ namespace FootballCrimes.API
             });
             services.AddDbContext<FootballCrimesContext>(config =>
             {
-                var connstring = Configuration.GetConnectionString("DefaultConnection");
-                config.UseSqlServer(connstring);
+                string connStr = Environment.GetEnvironmentVariable("MYSQLCONNSTR_localdb")?.ToString();
+                if (string.IsNullOrEmpty(connStr))
+                {
+                    var connstring = Configuration.GetConnectionString("DefaultConnection");
+                    config.UseSqlServer(connstring);
+                } else
+                {
+                    // Envrionment Variable connection string has a port in it
+                    string connectionstring = RemovePortFromConnectionString(connStr);
+                    config.UseMySQL(connectionstring);
+                }
+
             });
             services.AddSingleton<HttpClient>();
             services.AddTransient<FootballDataClient>();
@@ -61,6 +72,27 @@ namespace FootballCrimes.API
 
 
             services.AddHostedService<DataInitialiser>();
+        }
+
+        private static string RemovePortFromConnectionString(string connStr)
+        {
+            string[] connArray = Regex.Split(connStr, ";");
+            string connectionstring = null;
+            for (int i = 0; i < connArray.Length; i++)
+            {
+
+                if (i == 1)
+                {
+                    string[] datasource = Regex.Split(connArray[i], ":");
+                    connectionstring += datasource[0] + string.Format(";port={0};", datasource[1]);
+                }
+                else
+                {
+                    connectionstring += connArray[i] + ";";
+                }
+            }
+
+            return connectionstring;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
