@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FootballCrimes.Shared\FootballCrimes.Shared.csproj" />
     <ProjectReference Include="..\FootballData.Client\FootballData.Client.csproj" />
+    <ProjectReference Include="..\MySQLMigrations\MySQLMigrations.csproj" />
     <ProjectReference Include="..\PoliceClient\Police.Client.csproj" />
     <ProjectReference Include="..\Postcode.Client\Postcode.Client.csproj" />
   </ItemGroup>

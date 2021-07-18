@@ -47,16 +47,18 @@ namespace FootballCrimes.API
             });
             services.AddDbContext<FootballCrimesContext>(config =>
             {
-                string connStr = Environment.GetEnvironmentVariable("MYSQLCONNSTR_localdb")?.ToString();
+                // In reality would move this to a config in appsettings to decide DB type
+                string connStr = Environment.GetEnvironmentVariable("MYSQLCONNSTR_localdb")?.ToString() ?? "";
                 if (string.IsNullOrEmpty(connStr))
                 {
                     var connstring = Configuration.GetConnectionString("DefaultConnection");
                     config.UseSqlServer(connstring);
-                } else
+                }
+                else
                 {
-                    // Envrionment Variable connection string has a port in it
+                    // Envrionment Variable connection string has a port in it - removing it seems to allow connection
                     string connectionstring = RemovePortFromConnectionString(connStr);
-                    config.UseMySQL(connectionstring);
+                    config.UseMySQL(connectionstring, x => x.MigrationsAssembly("MySQLMigrations"));
                 }
 
             });
