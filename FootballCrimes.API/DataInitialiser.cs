@@ -62,6 +62,7 @@ namespace FootballCrimes.API
                     {
                         await Task.Delay(1500);
                     }
+                    counter++;
                 }
             }
             context.SaveChanges();

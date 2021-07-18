@@ -65,26 +65,6 @@ namespace FootballCrimes.API
             services.AddHostedService<DataInitialiser>();
         }
 
-        private static string RemovePortFromConnectionString(string connStr)
-        {
-            string[] connArray = Regex.Split(connStr, ";");
-            string connectionstring = null;
-            for (int i = 0; i < connArray.Length; i++)
-            {
-
-                if (i == 1)
-                {
-                    string[] datasource = Regex.Split(connArray[i], ":");
-                    connectionstring += datasource[0] + string.Format(";port={0};", datasource[1]);
-                }
-                else
-                {
-                    connectionstring += connArray[i] + ";";
-                }
-            }
-
-            return connectionstring;
-        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, FootballCrimesContext dbContext)
