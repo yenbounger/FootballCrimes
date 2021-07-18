@@ -59,7 +59,7 @@ namespace FootballCrimes.API
                 {
                     // Envrionment Variable connection string has a port in it - removing it seems to allow connection
                     string connectionstring = RemovePortFromConnectionString(connStr);
-                    config.UseMySQL(connectionstring, x => x.MigrationsAssembly("MySQLMigrations"));
+                    config.UseMySQL(connectionstring, x => x.MigrationsAssembly("MySQLMigrations.dll"));
                 }
 
             });
