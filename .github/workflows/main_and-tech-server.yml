@@ -11,6 +11,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: windows-latest
+    environment: BackendSecrets
 
     steps:
     # checkout the repo
@@ -22,6 +23,14 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '5.0.x'
+
+    - name: Secret Substition
+      uses: microsoft/variable-substitution@v1
+        with:
+          files: 'FootballCrimes.API/appsettings.json'
+        env:
+          ConnectionStrings.DefaultConnection: ${{secrets.CONNECTION_STRING}}
+          ApiKeys.FootballData: ${{ secrets.API_KEY }}
 
     - name: Build with dotnet
       run: dotnet build --configuration Release
