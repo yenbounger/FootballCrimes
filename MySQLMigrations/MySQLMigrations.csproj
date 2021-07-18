@@ -12,4 +12,9 @@
     <ProjectReference Include="..\FootballCrimes.API\FootballCrimes.API.csproj" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <BaseOutputPath>..\FootballCrimes.API\bin\</BaseOutputPath>
+  </PropertyGroup>
+
+
 </Project>
