@@ -11,7 +11,9 @@ on:
 jobs:
   build-and-deploy:
     runs-on: windows-latest
-    working-directory: ./FootballCrimes.Web
+    defaults:
+      run:
+        working-directory: ./FootballCrimes.Web
 
     steps:
     # checkout the repo
