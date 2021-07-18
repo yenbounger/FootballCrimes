@@ -58,6 +58,10 @@ namespace FootballCrimes.API
                 {
                     stadium.AddCrimes(await policeClient.GetDataForTimeAndPlace(stadium.Longitude, stadium.Latitude, date));
                     // max 15 requests per 1 second, set max requests to 14 and delay to 1.5 seconds to give some leeway
+                    if (counter % 14 == 0)
+                    {
+                        await Task.Delay(1500);
+                    }
                 }
             }
             context.SaveChanges();
