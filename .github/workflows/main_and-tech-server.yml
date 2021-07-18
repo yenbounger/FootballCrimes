@@ -26,9 +26,9 @@ jobs:
 
     - name: Secret Substition
       uses: microsoft/variable-substitution@v1
-        with:
+      with:
           files: 'FootballCrimes.API/appsettings.json'
-        env:
+      env:
           ConnectionStrings.DefaultConnection: ${{secrets.CONNECTION_STRING}}
           ApiKeys.FootballData: ${{ secrets.API_KEY }}
 
