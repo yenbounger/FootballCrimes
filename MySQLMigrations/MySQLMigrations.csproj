@@ -8,4 +8,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FootballCrimes.API\FootballCrimes.API.csproj" />
+  </ItemGroup>
+
 </Project>

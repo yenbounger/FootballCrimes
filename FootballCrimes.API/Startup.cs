@@ -38,6 +38,7 @@ namespace FootballCrimes.API
         {
             services.AddCors(opts =>
             {
+                // would be more strict in reality - just configuring stricter cors manually on azure 
                 opts.AddPolicy("default", new CorsPolicyBuilder().AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin().Build());
             });
             services.AddControllers().AddJsonOptions(opts =>
