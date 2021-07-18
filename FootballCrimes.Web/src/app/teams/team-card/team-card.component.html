@@ -1,0 +1,17 @@
+<mat-card class="mat-elevation-z4">
+  <mat-card-header>
+    <mat-card-title>{{team.teamName}}</mat-card-title>
+    <mat-card-subtitle>{{team.stadiumName}}</mat-card-subtitle>
+  </mat-card-header>
+  <div class="card-img-wrapper">
+    <img mat-card-image class="card-img" [src]="team.teamCrestURL" [alt]="'Crest of ' + team.teamCrestURL" />
+  </div>
+  <mat-card-actions>
+    <p class="mat-small">Total Crimes: {{team.crimeCount}}</p>
+    <p class="mat-small">Seasons in Premiership:
+      <ng-container *ngFor="let year of team.seasonsInPremiership">
+        {{year}} </ng-container>
+    </p>
+  </mat-card-actions>
+
+</mat-card>

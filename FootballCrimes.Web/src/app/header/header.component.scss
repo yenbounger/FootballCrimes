@@ -1,0 +1,15 @@
+a {
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 0.5em;
+}
+
+a.active {
+  background-color: lighten(#3f51b5, 20%);
+}
+
+.mx-auto {
+  margin-right: auto;
+  margin-left: auto;
+}

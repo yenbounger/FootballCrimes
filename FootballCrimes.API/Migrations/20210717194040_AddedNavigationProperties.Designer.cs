@@ -4,14 +4,16 @@ using FootballCrimes.API;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FootballCrimes.API.Migrations
 {
     [DbContext(typeof(FootballCrimesContext))]
-    partial class FootballCrimesContextModelSnapshot : ModelSnapshot
+    [Migration("20210717194040_AddedNavigationProperties")]
+    partial class AddedNavigationProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

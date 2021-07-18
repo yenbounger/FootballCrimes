@@ -1,0 +1,31 @@
+<mat-table [dataSource]="dataSource" matSort matSortActive="dateCommited" matSortDirection="asc" matSortDisableClear
+>
+
+  <ng-container matColumnDef="teamName">
+    <mat-header-cell *matHeaderCellDef>Team Name</mat-header-cell>
+    <mat-cell *matCellDef="let data">{{data.teamName}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="stadiumName">
+    <mat-header-cell *matHeaderCellDef>Stadium Name</mat-header-cell>
+    <mat-cell *matCellDef="let data">{{data.stadiumName}}</mat-cell>
+
+  </ng-container>
+
+  <ng-container matColumnDef="crimeType">
+    <mat-header-cell *matHeaderCellDef>Duration</mat-header-cell>
+    <mat-cell *matCellDef="let data">{{data.crimeType | crimeType}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="dateCommited">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Date Commited</mat-header-cell>
+    <mat-cell *matCellDef="let data">{{data.dateCommited | date : 'MMMM yyyy'}}</mat-cell>
+  </ng-container>
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+</mat-table>
+
+<mat-paginator [length]="(totalCount | async)" [pageSize]="10" [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>

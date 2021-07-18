@@ -30,6 +30,8 @@ namespace FootballCrimes.API.Models
         public double Longitude { get; private set; }
         public double Latitude { get; private set; }
         public List<Crime> Crimes { get; private set; } = new List<Crime>();
+        public Team Team { get; set; }
+        public Guid TeamId { get; set; }
 
 
         public void UpdateLongAndLat(double longitude, double latitude)

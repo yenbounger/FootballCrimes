@@ -1,4 +1,5 @@
 ﻿using FootballCrimes.API.DTO;
+using FootballCrimes.API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,11 +21,26 @@ namespace FootballCrimes.API.Controllers
             _context = context;
         }
 
-       [HttpGet]
-       public List<TableDTO> GetTableData()
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TableDTO))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetTableData([FromQuery] int page, [FromQuery] int take, [FromQuery] string sortDirection = "desc")
         {
-            var allCrimes = _context.Teams.Include(x => x.Stadium).ThenInclude(x => x.Crimes).ToList();
-            return allCrimes.Select(x => new TableDTO(x)).ToList();
+            var count = _context.Crimes.Count();
+            List<Crime> allCrimes;
+            if (sortDirection == "asc")
+            {
+                allCrimes = _context.Crimes.Include(x => x.Stadium).ThenInclude(x => x.Team).OrderBy(x => x.Date).Skip(page * take).Take(take).ToList();
+            }
+            else if (sortDirection == "desc")
+            {
+                allCrimes = _context.Crimes.Include(x => x.Stadium).ThenInclude(x => x.Team).OrderByDescending(x => x.Date).Skip(page * take).Take(take).ToList();
+            }
+            else
+            {
+                return BadRequest($"{sortDirection} is not a valid sort direction");
+            }
+            return Ok(new TableDTO(allCrimes, count));
         }
 
     }

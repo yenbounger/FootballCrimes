@@ -53,26 +53,14 @@ namespace FootballCrimes.API
             foreach (var stadium in crimelessStadiums)
             {
                 var policeClient = scope.ServiceProvider.GetRequiredService<PoliceDataClient>();
+                var stadiumCrimes = new List<Crime>();
                 foreach (var date in policeDates)
                 {
-                    var result = await policeClient.GetDataForTimeAndPlace(stadium.Longitude, stadium.Latitude, date);
+                    stadium.AddCrimes(await policeClient.GetDataForTimeAndPlace(stadium.Longitude, stadium.Latitude, date));
                     // max 15 requests per 1 second, set max requests to 14 and delay to 1.5 seconds to give some leeway
-                    if (counter % 15 == 0)
-                    {
-                        await Task.Delay(1000);
-                    }
-                    counter++;
-                    if (result.Count > 0)
-                    {
-
-                        stadium.AddCrimes(result);
-                        context.Update(stadium);
-                        context.SaveChanges();
-                    }
                 }
-
-
             }
+            context.SaveChanges();
         }
 
         private static async Task AddPositionalData(IServiceScope scope, FootballCrimesContext context)

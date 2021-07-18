@@ -9,29 +9,32 @@ namespace FootballCrimes.API.DTO
 {
     public class TableDTO
     {
-        public TableDTO(Team team)
+        public TableDTO(List<Crime> crime, int count)
         {
-            TeamId = team.Id;
-            TeamCrestUrl = team.CrestUrl;
-            TeamName = team.Name;
-            StadiumName = team.Stadium.Name;
-            Crimes = team.Stadium.Crimes.Select(x => new CrimeDTO(x)).ToList();
+            CrimeData = crime.Select(x => new CrimeData(x)).ToList();
+            Count = count;
         }
-        public Guid TeamId { get; set; }
-        public string TeamCrestUrl { get; set; }
-        public string TeamName { get; set; }
-        public string StadiumName { get; set; }
-        public List<CrimeDTO> Crimes { get; set; }
+        public int Count { get; set; }
+        public List<CrimeData> CrimeData { get; set; }
     }
 
-    public class CrimeDTO
+    public class CrimeData
     {
-        public CrimeDTO(Crime crime)
+        public CrimeData(Crime crime)
         {
-            CrimeType = crime.Type;
             DateCommited = crime.Date;
+            CrimeType = crime.Type;
+            StadiumName = crime.Stadium.Name;
+            TeamName = crime.Stadium.Team.Name;
+            TeamId = crime.Stadium.TeamId;
         }
+
+
+        public Guid TeamId { get; set; }
+        public string TeamName { get; set; }
+        public string StadiumName { get; set; }
         public CrimeType CrimeType { get; set; }
         public DateTime DateCommited { get; set; }
     }
+
 }

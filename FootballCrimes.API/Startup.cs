@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Postcode.Client;
 using PoliceClient;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace FootballCrimes.API
 {
@@ -34,7 +35,10 @@ namespace FootballCrimes.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddCors(opts =>
+            {
+                opts.AddPolicy("default", new CorsPolicyBuilder().AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin().Build());
+            });
             services.AddControllers().AddJsonOptions(opts =>
             {
                 opts.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
@@ -53,6 +57,8 @@ namespace FootballCrimes.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FootballCrimes", Version = "v1" });
             });
+
+
             services.AddHostedService<DataInitialiser>();
         }
 
@@ -67,7 +73,7 @@ namespace FootballCrimes.API
             }
 
             //remove need for manual update database calls
-
+            app.UseCors("default");
 
             dbContext.Database.Migrate();
             app.UseHttpsRedirection();
