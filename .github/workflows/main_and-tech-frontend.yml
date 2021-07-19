@@ -28,9 +28,9 @@ jobs:
 
     - name: npm install & build
       run: |
-        npm install
+        npm ci
         npm run build
-        npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+        npm run ciTest
 
     - name: Run Azure webapp deploy action using publish profile credentials
       uses: azure/webapps-deploy@v2
