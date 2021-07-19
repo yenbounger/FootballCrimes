@@ -3,14 +3,12 @@
     <mat-card-title>{{team.teamName}}</mat-card-title>
     <mat-card-subtitle>{{team.stadiumName}}</mat-card-subtitle>
   </mat-card-header>
-  <div class="card-img-wrapper">
-    <img mat-card-image class="card-img" [src]="team.teamCrestURL" [alt]="'Crest of ' + team.teamCrestURL" />
+  <div class="card-img-wrapper" [style]="backgroundImage">
   </div>
   <mat-card-actions>
     <p class="mat-small">Total Crimes: {{team.crimeCount}}</p>
-    <p class="mat-small">Seasons in Premiership:
-      <ng-container *ngFor="let year of team.seasonsInPremiership">
-        {{year}} </ng-container>
+    <p class="mat-small">Season<ng-container *ngIf="team.seasonsInPremiership.length > 1">s</ng-container> in
+      Premiership: {{ team.seasonsInPremiership | list}}
     </p>
   </mat-card-actions>
 

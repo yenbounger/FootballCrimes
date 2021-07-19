@@ -1,0 +1,13 @@
+<mat-card class="mat-elevation-z4">
+  <mat-card-content id="graphBody" #cardBody>
+    <mat-tab-group class="tab-group" (selectedIndexChange)="selectedIndex = $event">
+      <mat-tab label="Crime Count by Month">
+      </mat-tab>
+      <mat-tab label="Crime Count by Type">
+      </mat-tab>
+    </mat-tab-group>
+    <app-crime-count-by-month *ngIf="selectedIndex === 0" [cardBody]="cardBody" [team]="team">
+    </app-crime-count-by-month>
+    <app-crimes-by-type *ngIf="selectedIndex === 1" [cardBody]="cardBody" [team]="team"></app-crimes-by-type>
+  </mat-card-content>
+</mat-card>

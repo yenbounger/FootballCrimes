@@ -1,0 +1,10 @@
+<ng-container *ngIf="team$ | async as team">
+  <div class="summary-container" fxLayout="row wrap" fxLayoutGap="16px grid" fxLayoutGap.sm="0px grid" fxLayoutGap.xs="0px grid">
+    <div [fxFlex]="'50%'" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="50%">
+      <app-team-card [team]="team"></app-team-card>
+    </div>
+    <div [fxFlex]="'50%'" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="50%">
+      <app-graph-card [team]="team"></app-graph-card>
+    </div>
+  </div>
+</ng-container>

@@ -1,9 +1,9 @@
-<mat-table [dataSource]="dataSource" matSort matSortActive="dateCommited" matSortDirection="asc" matSortDisableClear
->
+<mat-table [dataSource]="dataSource" matSort matSortActive="dateCommited" matSortDirection="asc" matSortDisableClear>
 
   <ng-container matColumnDef="teamName">
     <mat-header-cell *matHeaderCellDef>Team Name</mat-header-cell>
-    <mat-cell *matCellDef="let data">{{data.teamName}}</mat-cell>
+    <mat-cell class='clickable' *matCellDef="let data" [routerLink]="['/team', data.teamId]">{{data.teamName}}
+    </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="stadiumName">

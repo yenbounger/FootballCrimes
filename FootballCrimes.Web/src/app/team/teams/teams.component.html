@@ -1,7 +1,7 @@
 <div class="content">
   <div fxLayout="row wrap" fxLayoutGap="16px grid">
     <div [fxFlex]="(100 / cols) + '%'" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let data of (cardData$ | async)">
-      <app-team-card [team]="data"></app-team-card>
+      <app-team-card [team]="data" class="clickable" [routerLink]="['/team', data.teamId]"></app-team-card>
     </div>
   </div>
 </div>

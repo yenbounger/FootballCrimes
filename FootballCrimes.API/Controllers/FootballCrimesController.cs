@@ -24,7 +24,7 @@ namespace FootballCrimes.API.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TableDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetTableData([FromQuery] int page, [FromQuery] int take, [FromQuery] string sortDirection = "desc")
+        public IActionResult GetTableData([FromQuery] int page = 0, [FromQuery] int take = 10, [FromQuery] string sortDirection = "desc")
         {
             var count = _context.Crimes.Count();
             List<Crime> allCrimes;

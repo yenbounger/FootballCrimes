@@ -1,0 +1,9 @@
+<ngx-charts-bar-vertical *ngIf="sortedData && sortedData.length > 0"
+  [view]="[cardBody.offsetWidth, (cardBody.offsetHeight - 48.66667)]" [results]="sortedData" [xAxis]="true"
+  [yAxis]="true" xAxisLabel="Date" yAxisLabel="Crimes Commited" [showYAxisLabel]="true"
+  [xAxisTickFormatting]="formatxAxisTicks">
+  <ng-template #tooltipTemplate let-model="model">
+    <h3>{{ model.name | date : 'MMM yyyy' }}</h3>
+    <h2>Number of Crimes: {{ model.value }}</h2>
+  </ng-template>
+</ngx-charts-bar-vertical>

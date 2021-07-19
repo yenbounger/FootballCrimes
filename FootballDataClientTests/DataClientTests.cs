@@ -1,4 +1,7 @@
+using FootballCrimes.API.Config;
 using FootballData.Client;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
@@ -8,8 +11,15 @@ namespace FootballDataClientTests
     public class DataClientTests
     {
         // Didn't want to spend the time mocking HTTP Client
-        private readonly FootballDataClient _footballDataClient = new(null, null);
+        private FootballDataClient _footballDataClient;
 
+
+        [SetUp]
+        public void Setup()
+        {
+            var apiKeys = new ApiKeys { FootballData = "notAKey" };
+            _footballDataClient = new FootballDataClient(null, Options.Create<ApiKeys>(apiKeys));
+        }
         [Test]
         [TestCase(2017)]
         [TestCase(2021)]

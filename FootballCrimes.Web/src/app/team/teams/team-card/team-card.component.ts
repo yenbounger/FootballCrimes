@@ -14,4 +14,8 @@ export class TeamCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get backgroundImage() {
+    return `background-image: url(${this.team.teamCrestURL})`
+  }
+
 }

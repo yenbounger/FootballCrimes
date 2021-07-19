@@ -1,0 +1,7 @@
+<ngx-charts-pie-chart [view]="[cardBody.offsetWidth, (cardBody.offsetHeight - 48.66667)]" [results]="sortedData"
+  [labels]="true" [labelFormatting]="crimeTypePipe.transform" [trimLabels]="false">
+  <ng-template #tooltipTemplate let-model="model">
+    <h3>{{ model.name | crimeType }}</h3>
+    <h2>Number of Crimes: {{ model.value }}</h2>
+  </ng-template>
+</ngx-charts-pie-chart>

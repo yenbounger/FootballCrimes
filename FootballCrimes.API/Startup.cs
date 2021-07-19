@@ -71,10 +71,11 @@ namespace FootballCrimes.API
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FootballCrimes.API v1"));
+                app.UseDeveloperExceptionPage();                
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FootballCrimes.API v1"));
 
             //remove need for manual update database calls
             app.UseCors("default");

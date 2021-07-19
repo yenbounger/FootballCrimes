@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { By } from '@angular/platform-browser';
 
 import { HeaderComponent } from './header.component';
 
@@ -8,7 +10,10 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ]
+      declarations: [ HeaderComponent ],
+      imports: [
+        MatToolbarModule
+      ]
     })
     .compileComponents();
   });
@@ -21,5 +26,16 @@ describe('HeaderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+
+  it('should have a header', () => {
+    var header = fixture.debugElement.query(By.css("#header"));
+    expect(header).toBeTruthy();
+  });
+
+  it('should be primary', () => {
+    var header = fixture.debugElement.query(By.css("#header"));
+    expect(header.attributes['color']).toBe('primary');
   });
 });
